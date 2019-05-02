@@ -1,0 +1,12 @@
+{
+  "name": "My Awesome Extension",
+  "description": "The coolest most awesomest extension there ever was. Created using create-react-app.",
+  "version": "0.0.1",
+
+  "browser_action": {
+    "default_icon": "icon.jpg",
+    "default_popup": "index.html"
+  },
+
+  "manifest_version": 2
+}
