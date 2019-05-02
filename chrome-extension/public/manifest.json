@@ -1,12 +1,15 @@
 {
-  "name": "My Awesome Extension",
-  "description": "The coolest most awesomest extension there ever was. Created using create-react-app.",
+  "name": "Headline Fetcher",
+  "manifest_version": 2,
   "version": "0.0.1",
-
-  "browser_action": {
-    "default_icon": "icon.jpg",
-    "default_popup": "index.html"
-  },
-
-  "manifest_version": 2
+  "description": "Retrieves headlines relevant to the website you are currently on",
+  "content_scripts": [{
+    "js": [ "content.js"],
+    "matches": [ "<all_urls>"]
+   }],
+  "background": {
+    "scripts": ["background.js"]
+   },
+   "permissions": ["contextMenus", "tabs"],
+   "web_accessible_resources" : ["*.html"]
 }
