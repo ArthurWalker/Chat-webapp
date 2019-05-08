@@ -1,14 +1,15 @@
 // rcc -> tab for quick class based component
 
 import React from 'react'
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import hidden_data from '../hidden_data'
 import {Image,Button} from 'semantic-ui-react'
+import FacebookLogin from 'react-facebook-login';
 
 class LoginFacebook extends React.Component{
     constructor(){
         super()
         this.state={
+            isLoading:false,
             isLogin:false,
             userID:'',
             name:'',
@@ -16,22 +17,15 @@ class LoginFacebook extends React.Component{
             picture:''
         }
         this.responseFacebook = this.responseFacebook.bind(this)
+        this.componentClicked = this.componentClicked.bind(this)
     }
 
     componentClicked(){
         console.log('Clicked')
-    }
+    }   
 
     responseFacebook(response){
         console.log(response)
-        this.setState({
-            isLogin:true,
-            userID:response.userID,
-            email:response.email,
-            name:response.name,
-            picture:response.picture
-        })
-        
     }
 
     render(){
@@ -44,12 +38,12 @@ class LoginFacebook extends React.Component{
         }else{
             fbContent = (<FacebookLogin
                 appId={hidden_data.fb_appID}
-                autoLoad
-                callback={this.responseFacebook}
-                render={renderProps => (
-                  <Button primary onClick={renderProps.onClick}>Login Facebook</Button>
-                )}
-              />)
+                autoLoad={true}
+                fields="name,email,picture"
+                onClick={this.componentClicked}
+                callback={this.responseFacebook} 
+                cssClass="my-facebook-button-class"
+                />)
         }
 
         return(

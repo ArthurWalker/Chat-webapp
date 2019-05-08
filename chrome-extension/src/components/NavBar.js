@@ -1,7 +1,7 @@
 import React from 'react'
 import {Input,Menu,Segment,Popup} from 'semantic-ui-react'
 // import axios from 'axios'
-import Platform from './Platform'
+import LoginFacebook from './LoginFacebook'
 
 class NavBar extends React.Component{
     constructor(){
@@ -36,14 +36,25 @@ class NavBar extends React.Component{
                         <Menu.Menu position='right'> 
                             <Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick}/>
                             <Menu.Item name='friends' active={activeItem === 'friends'} onClick={this.handleItemClick}/>
-                            <Popup on='click' position='top right'
+                            <Popup hideOnScroll on='click' position='top right'
                                 trigger={<Menu.Item name='platform' active={activeItem === 'platform'} onClick={this.handleItemClick}/>} 
-                                content={<Platform/>} 
+                                content={
+                                    <Menu vertical secondary>
+                                        <Menu.Item name='gmail' active={activeItem==='gmail'} onClick={this.handleItemClick}>
+                                            Log in Gmail
+                                        </Menu.Item>
+                                        <Menu.Item name='facebook' active={activeItem==='facebook'} onClick={this.handleItemClick}>
+                                            <LoginFacebook/>
+                                        </Menu.Item>
+                                        <Menu.Item name='twitter' active={activeItem==='twitter'} onClick={this.handleItemClick}>
+                                            Log in Twitter
+                                        </Menu.Item>
+                                    </Menu>
+                                } 
                             />
                         </Menu.Menu>
                     </Menu>
                 </Segment>
-                 
             </div>
         )
     }
