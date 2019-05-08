@@ -1,36 +1,45 @@
 import React from 'react'
-import {Input,Menu,Segment} from 'semantic-ui-react'
+import {Input,Menu,Segment,Popup} from 'semantic-ui-react'
+// import axios from 'axios'
+import Platform from './Platform'
 
 class NavBar extends React.Component{
     constructor(){
         super()
         this.state={
-            activeItem:''
+            activeItem:'',
+            isLoading:false,
         }
         this.handleItemClick=this.handleItemClick.bind(this)
     }
 
-    handleItemClick(e){
+
+    handleItemClick(event,{name}){
         this.setState({
-            [e.target.name]:e.target.value
+            activeItem:name
         })
     }
-    
+
     render(){
-        const activeItem=this.state
+        const activeItem=this.state.activeItem
         const config={
             padding:'5px'
         }
+        
+        console.log(activeItem)
         return(
             <div>
                 <Segment inverted style={config}>
                     <Menu inverted secondary >
-                        <Menu.Item name='home' color={'blue'} active={activeItem === 'home'} onClick={this.handleItemClick}/>
+                        <Menu.Item name='home' active={this.state.activeItem === 'home'} onClick={this.handleItemClick}/>
                         <Menu.Item><Input icon='search' placeholder='Search...' /></Menu.Item> 
                         <Menu.Menu position='right'> 
                             <Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick}/>
                             <Menu.Item name='friends' active={activeItem === 'friends'} onClick={this.handleItemClick}/>
-                            <Menu.Item name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick}/>
+                            <Popup on='click' position='top right'
+                                trigger={<Menu.Item name='platform' active={activeItem === 'platform'} onClick={this.handleItemClick}/>} 
+                                content={<Platform/>} 
+                            />
                         </Menu.Menu>
                     </Menu>
                 </Segment>
