@@ -9,7 +9,7 @@ firebase.initializeApp({
     authDomain:hidden_data.authDomain
 })
 
-class Login2 extends React.Component{
+class LoginButton extends React.Component{
     constructor(props){
         super(props)
         this.state={
@@ -52,7 +52,7 @@ class Login2 extends React.Component{
                         <Grid>
                             <Grid.Row columns={2}>
                                 <Grid.Column>
-                                    <Image src={firebase.auth().currentUser.photoURL} circular />
+                                    <Image alt='profile picture' src={firebase.auth().currentUser.photoURL} circular />
                                 </Grid.Column>
                                 <Grid.Column>
                                     <Button positive onClick={this.handleSignOut}>Sign out</Button>
@@ -70,4 +70,4 @@ class Login2 extends React.Component{
     }
 }
 
-export default Login2
+export default LoginButton

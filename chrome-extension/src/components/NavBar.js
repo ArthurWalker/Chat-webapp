@@ -1,7 +1,10 @@
 import React from 'react'
-import {Input,Menu,Segment,Popup} from 'semantic-ui-react'
+import {Input,Menu,Segment,Popup,Grid} from 'semantic-ui-react'
 // import axios from 'axios'
-import Login2 from './Login2'
+import LoginButton from './LoginButton'
+import HomeButton from './HomeButton'
+import MessageButton from './MessageButton'
+import FriendButton from './FriendButton'
 
 class NavBar extends React.Component{
     constructor(props){
@@ -19,9 +22,6 @@ class NavBar extends React.Component{
         this.setState({
             activeItem:name
         })
-        if (name==='home'){
-            window.location.href = 'http://'+this.state.dataAfterLoggedIn.providerData[0].providerId
-        }
     }
 
     dataAfterLoggedIn(dataFromLoggedIn){
@@ -39,20 +39,32 @@ class NavBar extends React.Component{
             <div>
                 <Segment inverted style={config}>
                     <Menu inverted secondary >
-                        {dataAfterLoggedIn && <Menu.Item name='home' active={this.state.activeItem === 'home'} onClick={this.handleItemClick}></Menu.Item>}
+                        {dataAfterLoggedIn && 
+                        <Popup on = 'click' position='top left'
+                            trigger={<Menu.Item name='home' active={this.state.activeItem === 'home'} onClick={this.handleItemClick}></Menu.Item>}
+                            content={<HomeButton/>}
+                        />}
                         
                         {dataAfterLoggedIn && <Menu.Item><Input icon='search' placeholder='Search...' /></Menu.Item> }
                         
                         <Menu.Menu position='right'> 
-                            {dataAfterLoggedIn && <Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick}/>}
+                            {dataAfterLoggedIn && 
+                            <Popup on='click' position='top center'
+                                trigger={<Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick}/>}
+                                content={<MessageButton/>}
+                            />}
                                 
-                            {dataAfterLoggedIn &&   <Menu.Item name='friends' active={activeItem === 'friends'} onClick={this.handleItemClick}/>}
-                        
+                            {dataAfterLoggedIn && 
+                            <Popup on='click' position='top center'
+                                trigger={<Menu.Item name='friends' active={activeItem === 'friends'} onClick={this.handleItemClick}/>}
+                                content={<FriendButton/>}
+                            />}
+
                             <Popup on='click' position='top right'
                                 trigger={<Menu.Item name='user' active={activeItem === 'user'} onClick={this.handleItemClick}/>} 
                                 content={
                                     <Menu vertical secondary>
-                                        <Login2 dataPassToParent={this.dataAfterLoggedIn}/>
+                                        <LoginButton dataPassToParent={this.dataAfterLoggedIn}/>
                                     </Menu>
                                 } 
                             />
