@@ -2,7 +2,7 @@ import React from 'react'
 import firebase from 'firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import hidden_data from '../hidden_data'
-import {Button,Image,Segment} from 'semantic-ui-react'
+import {Button,Image,Grid} from 'semantic-ui-react'
 
 firebase.initializeApp({
     apiKey:hidden_data.apiKey,
@@ -10,10 +10,11 @@ firebase.initializeApp({
 })
 
 class Login2 extends React.Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
-            isLoggedIn: false
+            isLoggedIn: false,
+            userData:{}
         }
         this.uiConfig = {
             signInFlow:'popup',
@@ -33,6 +34,8 @@ class Login2 extends React.Component{
         firebase.auth().onAuthStateChanged(user=>{
             this.setState({isLoggedIn:!!user})
             console.log(user)
+            this.setState({userData:user})
+            this.props.dataPassToParent(this.state.userData)
         })
     }
 
@@ -45,18 +48,21 @@ class Login2 extends React.Component{
             {
                 this.state.isLoggedIn ? 
                     (   
-                    <div>
-                        <h1>{firebase.auth().currentUser.displayName}</h1>    
-                        <Image src={firebase.auth().currentUser.photoURL}/>
-                        <Button onClick={this.handleSignOut}>Sign out</Button>
-                    </div>
+                        <Grid>
+                            <Grid.Row columns={2}>
+                                <Grid.Column>
+                                    <Image src={firebase.auth().currentUser.photoURL} circular />
+                                </Grid.Column>
+                                <Grid.Column>
+                                    <Button positive onClick={this.handleSignOut}>Sign out</Button>
+                                </Grid.Column>
+                            </Grid.Row>
+                        </Grid>                                
                     ):
                     (
-                        
                         <StyledFirebaseAuth 
                         uiConfig = {this.uiConfig}
                         firebaseAuth = {firebase.auth()}/>
-                    
                     )
             }
        </div>)
