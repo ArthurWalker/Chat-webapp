@@ -43,6 +43,7 @@ class Login2 extends React.Component{
         firebase.auth().signOut()
     }
 
+
     render(){
         return(<div>
             {

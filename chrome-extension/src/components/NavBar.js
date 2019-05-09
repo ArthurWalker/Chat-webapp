@@ -19,6 +19,9 @@ class NavBar extends React.Component{
         this.setState({
             activeItem:name
         })
+        if (name==='home'){
+            window.location.href = 'http://'+this.state.dataAfterLoggedIn.providerData[0].providerId
+        }
     }
 
     dataAfterLoggedIn(dataFromLoggedIn){
@@ -36,11 +39,15 @@ class NavBar extends React.Component{
             <div>
                 <Segment inverted style={config}>
                     <Menu inverted secondary >
-                        <Menu.Item name='home' active={this.state.activeItem === 'home'} onClick={this.handleItemClick}/>
-                        <Menu.Item><Input icon='search' placeholder='Search...' /></Menu.Item> 
+                        {dataAfterLoggedIn && <Menu.Item name='home' active={this.state.activeItem === 'home'} onClick={this.handleItemClick}></Menu.Item>}
+                        
+                        {dataAfterLoggedIn && <Menu.Item><Input icon='search' placeholder='Search...' /></Menu.Item> }
+                        
                         <Menu.Menu position='right'> 
-                            <Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick}/>
-                            <Menu.Item name='friends' active={activeItem === 'friends'} onClick={this.handleItemClick}/>
+                            {dataAfterLoggedIn && <Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick}/>}
+                                
+                            {dataAfterLoggedIn &&   <Menu.Item name='friends' active={activeItem === 'friends'} onClick={this.handleItemClick}/>}
+                        
                             <Popup on='click' position='top right'
                                 trigger={<Menu.Item name='user' active={activeItem === 'user'} onClick={this.handleItemClick}/>} 
                                 content={
