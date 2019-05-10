@@ -51,7 +51,7 @@ class NavBar extends React.Component{
                             {dataAfterLoggedIn && 
                             <Popup on='click' position='top center'
                                 trigger={<Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick}/>}
-                                content={<MessageButton/>}
+                                content={<MessageButton dataFromNav={dataAfterLoggedIn.providerData[0]}/>}
                             />}
                                 
                             {dataAfterLoggedIn && 
