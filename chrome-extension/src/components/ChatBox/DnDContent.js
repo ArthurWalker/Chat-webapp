@@ -30,14 +30,14 @@ class DnDContent extends React.Component{
         chatManager.connect()
         .then(currentUser => {
             this.currentUser=currentUser
-            this.currentUser.subscribeToRoom({
+            this.currentUser.subscribeToRoomMultipart({
                 roomId:"19396318",
-                messageLimit:20,
+                messageLimit:5,
                 hooks:{
-                    onNewMessage:message => {
-                        console.log('message.text',message.text)
+                    onMessage: message => {
+                        console.log("received message", message.parts[0].payload.content)
                         this.setState({messages:[...this.state.messages,message]})
-                    }
+                      }
                 }
             })
         })
