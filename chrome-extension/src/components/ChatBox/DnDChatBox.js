@@ -31,7 +31,7 @@ class DnDChatBox extends React.Component{
                 <div className="handle" style={{width:'150px'}}>
                     <DnDMechanism/>
                 </div>
-                <div style={{backgroundColor:'green',width:'800px'}}><DnDContent/></div>
+                <div style={{backgroundColor:'yellow',width:'800px'}}><DnDContent/></div>
             </div>
           </Draggable>
         );
