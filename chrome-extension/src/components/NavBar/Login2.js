@@ -1,12 +1,12 @@
 import React from 'react'
 import firebase from 'firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-import hidden_data from '../hidden_data'
+import sensitive_data from '../../hidden_data'
 import {Button,Image,Segment} from 'semantic-ui-react'
 
 firebase.initializeApp({
-    apiKey:hidden_data.apiKey,
-    authDomain:hidden_data.authDomain
+    apiKey:sensitive_data.apiKey,
+    authDomain:sensitive_data.authDomain
 })
 
 class Login2 extends React.Component{
