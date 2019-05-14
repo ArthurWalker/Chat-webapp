@@ -1,13 +1,21 @@
 import React from 'react'
-import Draggable from 'react-draggable'
 import DnDContent from './DnDContent'
-import DnDMechanism from './DnDMechanism'
+import {Rnd} from 'react-rnd'
+import { Label, Grid} from 'semantic-ui-react'
 
 class DnDChatBox extends React.Component{
     constructor(){
         super()
-        this.state={}
+        this.state={
+          undraggable:true,
+        }
+        this.handleButtonPress = this.handleButtonPress.bind(this)
     }
+
+    handleButtonPress () {
+      this.setState({undraggable:!this.state.undraggable})
+    }
+  
 
     eventLogger = (e, data) => {
         console.log('Event: ', e);
@@ -15,25 +23,27 @@ class DnDChatBox extends React.Component{
       };
      
       render() {
+        const style= {
+          //display: "flex",
+          alignItems: "center",
+          //justifyContent: "center",
+          border: "solid 1px #ddd",
+          background: "#f0f0f0",
+        }
+        const config= {
+          x: 100,
+          y: 500,
+        }
+        console.log(this.state.undraggable)
         return (
-          <Draggable
-            allowAnyClick={true}
-            axis="both"
-            handle=".handle"
-            defaultPosition={{x: 100, y: 100}}
-            position={null}
-            grid={[25, 25]}
-            scale={1}
-            onStart={this.handleStart}
-            onDrag={this.handleDrag}
-            onStop={this.handleStop}>
-            <div style={{display:'block'}} >
-                <div className="handle" style={{width:'150px'}}>
-                    <DnDMechanism/>
-                </div>
-                <div style={{backgroundColor:'yellow',width:'800px'}}><DnDContent/></div>
-            </div>
-          </Draggable>
+          <Rnd style={style} default={config} disableDragging={this.state.undraggable}>
+        
+                <Label attached='top' color={this.state.undraggable ? 'yellow':'green'} onClick={this.handleButtonPress}>
+                  Click to {this.state.undraggable ? 'enable':'disable'} the dragging mechanism
+                </Label>
+             
+                <DnDContent/>
+          </Rnd>
         );
       }
 }

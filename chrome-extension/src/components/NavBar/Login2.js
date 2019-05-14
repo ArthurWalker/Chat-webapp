@@ -2,7 +2,7 @@ import React from 'react'
 import firebase from 'firebase'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import sensitive_data from '../../hidden_data'
-import {Button,Image,Segment} from 'semantic-ui-react'
+import {Button,Image} from 'semantic-ui-react'
 
 firebase.initializeApp({
     apiKey:sensitive_data.apiKey,
