@@ -3,8 +3,8 @@ import MessageList from './Content/MessageList'
 import NewRoomForm from './Content/NewRoomForm'
 import RoomList from './Content/RoomList'
 import SendForm from './Content/SendForm'
-import { Grid } from 'semantic-ui-react'
-
+import { Grid,Button} from 'semantic-ui-react'
+import  '../../css/chat_container.css'
 import Chatkit from '@pusher/chatkit-client'
 import {instanceLocator,tokenUrl} from '../../hidden_data'
 
@@ -22,6 +22,11 @@ class DnDContent extends React.Component{
         this.subcribeToRoom=this.subcribeToRoom.bind(this)
         this.getRoom=this.getRoom.bind(this)
         this.createRoom=this.createRoom.bind(this)
+        this.resetMessageList = this.resetMessageList.bind(this)
+    }
+
+    resetMessageList(){
+        this.setState({roomId:''})
     }
 
     componentDidMount(){
@@ -90,22 +95,24 @@ class DnDContent extends React.Component{
 
     render(){
         //console.log('this.state.messages:',this.state.messages)
-        return(<div>
-            <Grid>
-                <Grid.Row>
-                    <Grid.Column width={8}>
+        return(
+        <div className="body">
+            <Grid className='grid'>
+                <Grid.Row className='row-list'>
+                    <Grid.Column width={5}>
                         <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
                     </Grid.Column>
-                    <Grid.Column width={8}>
+                    <Grid.Column width={7}>
                         <MessageList roomId={this.state.roomId} messageList={this.state.messages}/>
+                        {this.state.roomId && <Button primary onClick={this.resetMessageList}>Reset message list</Button>}
                     </Grid.Column>
                 </Grid.Row>
 
-                <Grid.Row>
-                    <Grid.Column width={8}>
+                <Grid.Row className='row-form'>
+                    <Grid.Column width={5}>
                         <NewRoomForm createRoom={this.createRoom}/>
                     </Grid.Column>
-                    <Grid.Column width={8}>
+                    <Grid.Column width={7}>
                         <SendForm disabled={!this.state.roomId} sendMessage={this.sendMessage}/>
                     </Grid.Column>
                 </Grid.Row>

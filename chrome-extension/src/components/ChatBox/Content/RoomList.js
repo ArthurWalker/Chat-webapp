@@ -14,12 +14,14 @@ class RoomList extends React.Component{
         // console.log(this.props.rooms)
         return(<div>
             <h1>Room List</h1>
-            <List link>
+            <List link divided verticalAlign='middle'>
                 {orderedRooms.map((room,index) =>{
                     const active = this.props.roomId === room.id ? 'active':''
                     return(
                     <List.Item as='a' style={active !== '' ? active_style:{}} onClick={()=>{this.props.subcribeToRoom(room.id)}} key={index}>
-                        {room.name}
+                        <List.Content>
+                            <List.Header>{room.name}</List.Header>
+                        </List.Content>
                     </List.Item>)
                 })}
             </List>
