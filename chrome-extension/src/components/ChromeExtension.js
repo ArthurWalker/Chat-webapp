@@ -6,7 +6,7 @@ class ChromeExtension extends React.Component{
     render(){
         return(
         <div className='extension'>
-            <NavBar/>
+            {/* <NavBar/> */}
             <DnDChatBox/>
  
         </div>)

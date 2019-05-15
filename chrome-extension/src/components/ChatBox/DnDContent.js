@@ -3,20 +3,21 @@ import MessageList from './Content/MessageList'
 import NewRoomForm from './Content/NewRoomForm'
 import RoomList from './Content/RoomList'
 import SendForm from './Content/SendForm'
-import { Grid,Button} from 'semantic-ui-react'
+import {Container,Button,Grid,Label} from 'semantic-ui-react'
 import  '../../css/chat_container.css'
 import Chatkit from '@pusher/chatkit-client'
 import {instanceLocator,tokenUrl} from '../../hidden_data'
 
 
 class DnDContent extends React.Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state={
             messages:[],
             joinableRooms:[],
             joinedRooms:[],
-            roomId:''
+            roomId:'',
+            undraggable:true
         }
         this.sendMessage=this.sendMessage.bind(this)
         this.subcribeToRoom=this.subcribeToRoom.bind(this)
@@ -84,7 +85,7 @@ class DnDContent extends React.Component{
             roomId:this.state.roomId
         })
     }
-
+ 
     createRoom(roomName){
         this.currentUser.createRoom({
             name:roomName
@@ -93,31 +94,42 @@ class DnDContent extends React.Component{
         .catch(err => console.log('error to create a new room',err))
     }
 
+
     render(){
         //console.log('this.state.messages:',this.state.messages)
         return(
-        <div className="body">
-            <Grid className='grid'>
-                <Grid.Row className='row-list'>
-                    <Grid.Column width={5}>
-                        <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
-                    </Grid.Column>
-                    <Grid.Column width={7}>
-                        <MessageList roomId={this.state.roomId} messageList={this.state.messages}/>
-                        {this.state.roomId && <Button primary onClick={this.resetMessageList}>Reset message list</Button>}
-                    </Grid.Column>
-                </Grid.Row>
+            <Container className='chat-container'>
+              <Label attached='top' color={this.props.undraggable ? 'yellow':'green'} onClick={this.props.undraggableCallback}>
+                Click to {this.props.undraggable ? 'enable':'disable'} the dragging mechanism
+              </Label>
+            
+             <Grid>
+                    <Grid.Row>
+                        <Grid.Column width={8}>
+                            <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
+                        </Grid.Column>
+                        <Grid.Column width={8}>
+                            <MessageList roomId={this.state.roomId} messageList={this.state.messages}/>
+                            {this.state.roomId && <Button primary onClick={this.resetMessageList}>Reset message list</Button>}
+            
+                        </Grid.Column>
+                    </Grid.Row>
 
-                <Grid.Row className='row-form'>
-                    <Grid.Column width={5}>
-                        <NewRoomForm createRoom={this.createRoom}/>
-                    </Grid.Column>
-                    <Grid.Column width={7}>
-                        <SendForm disabled={!this.state.roomId} sendMessage={this.sendMessage}/>
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
-        </div>)
+                    <Grid.Row>
+                        <Grid.Column width={8}><NewRoomForm createRoom={this.createRoom}/>
+                        </Grid.Column>
+                        <Grid.Column width={8}><SendForm disabled={!this.state.roomId} sendMessage={this.sendMessage}/>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+        </Container>
+                
+            // <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
+            // <MessageList roomId={this.state.roomId} messageList={this.state.messages}/>
+            // {this.state.roomId && <Button primary onClick={this.resetMessageList}>Reset message list</Button>}
+            // <NewRoomForm createRoom={this.createRoom}/>
+            // <SendForm disabled={!this.state.roomId} sendMessage={this.sendMessage}/>
+           )
     }
 }
 
