@@ -97,32 +97,33 @@ class DnDContent extends React.Component{
 
     render(){
         //console.log('this.state.messages:',this.state.messages)
+        if (this.state.messages)
         return(
             <span className='chat-container'>
-            <Container>
-            <Label attached='top' color={this.props.undraggable ? 'yellow':'green'} onClick={this.props.undraggableCallback}>
-                            Click to {this.props.undraggable ? 'enable':'disable'} the dragging mechanism
-                        </Label>
-                        <Grid >
-                    <Grid.Row>
-                        <Grid.Column width={4}>
+                <div className='top'>
+                    <Label attached='top' color={this.props.undraggable ? 'yellow':'green'} onClick={this.props.undraggableCallback}>
+                        Click to {this.props.undraggable ? 'enable':'disable'} the dragging mechanism
+                    </Label>
+                </div>
+                <div className='bottom'>
+                    <div className='lower-left'>
+                        <div className='upper' >
                             <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
-                        </Grid.Column>
-                        <Grid.Column width={8}>
+                        </div>
+                        <div className='lower' >
+                            <NewRoomForm createRoom={this.createRoom}/>
+                        </div>
+                    </div>
+                    <div className='lower-right'>
+                        <div className='upper'  >
                             <MessageList roomId={this.state.roomId} messageList={this.state.messages}/>
-                            {this.state.roomId && <Button primary onClick={this.resetMessageList}>Reset message list</Button>}
-            
-                        </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <Grid.Column width={4}><NewRoomForm createRoom={this.createRoom}/>
-                        </Grid.Column>
-                        <Grid.Column width={8}><SendForm disabled={!this.state.roomId} sendMessage={this.sendMessage}/>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
-            </Container>
-                
+                            {this.state.roomId && <Button primary onClick={this.resetMessageList}>Reset message list</Button>} 
+                        </div>
+                        <div className='lower'>
+                            <SendForm disabled={!this.state.roomId} sendMessage={this.sendMessage}/>
+                        </div>
+                    </div>
+                </div>
             </span>
              
             // <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>

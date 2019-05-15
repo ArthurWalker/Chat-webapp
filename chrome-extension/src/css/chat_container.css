@@ -2,6 +2,47 @@
     background-color:rgb(132, 184, 233);
     height:100%;
     width:100%;
-    display:flex;
+    display: block;
 }
 
+.top{
+    display: block;
+    width:100%;
+    height:8%;
+    float:left;
+}
+
+.bottom{
+    display:block;
+    width:100%;
+    height:92%;
+    float:left;
+}
+
+.lower-left {
+    display: block;
+    float:left;
+    width: 40%;
+    height: 100%;
+}
+
+.lower-right{
+    display: block;
+    float:right;
+    width:60%;
+    height: 100%;
+}
+
+.upper{
+    display:block;
+    float:left;
+    height:80%;
+    width:100%;
+}
+
+.lower{
+    display:block;
+    float:right;
+    height:20%;
+    width:100%
+}

@@ -12,8 +12,8 @@ class RoomList extends React.Component{
             size:'10px'
         }
         // console.log(this.props.rooms)
-        return(<div>
-            <h1>Room List</h1>
+        return(
+        <div className='room-list'>
             <List link divided verticalAlign='middle'>
                 {orderedRooms.map((room,index) =>{
                     const active = this.props.roomId === room.id ? 'active':''

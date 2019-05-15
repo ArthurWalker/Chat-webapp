@@ -34,7 +34,7 @@ class DnDChatBox extends React.Component{
           border: "solid 1px #ddd",
           background: "#f0f0f0",
         }
-        const config= {x:0,y:0}
+        const config= {x:0,y:0,height:400,width:700}
         return (
 
           <Rnd style={style} default={config} disableDragging={this.state.undraggableShown}>

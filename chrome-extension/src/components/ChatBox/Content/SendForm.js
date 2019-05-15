@@ -1,5 +1,6 @@
 import React from 'react'
 import {Form} from 'semantic-ui-react'
+import '../../../css/send_form.css'
 
 class SendForm extends React.Component{
     constructor(props){
@@ -22,8 +23,8 @@ class SendForm extends React.Component{
     }
 
     render(){
-        return(<div>
-            <h1>SendForm</h1>
+        return(
+        <div className='send-form'>
             <Form onSubmit={this.handleSubmit} >
                 <Form.Field>
                     <Form.Input disabled={this.props.disabled} placeholder='Message...' value={this.state.message} name='text' type='text' onChange={this.handleChange}/>

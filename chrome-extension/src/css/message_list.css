@@ -1,0 +1,5 @@
+.message-list{
+    overflow: scroll;
+    max-height:180px;
+    background-color: blueviolet;
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import {Form} from 'semantic-ui-react'
+import '../../../css/room_form.css'
 
 class NewRoomForm extends React.Component{
 
@@ -25,8 +26,8 @@ class NewRoomForm extends React.Component{
     }
 
     render(){
-        return(<div>
-            <h1>SendForm</h1>
+        return(
+        <div className='room-form'>
             <Form onSubmit={this.handleSubmit} >
                 <Form.Field>
                     <Form.Input  placeholder='Create a new room' value={this.state.roomName} required name='text' type='text' onChange={this.handleChange}/>
