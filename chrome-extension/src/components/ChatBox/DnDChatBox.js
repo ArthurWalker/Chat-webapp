@@ -1,12 +1,17 @@
 import React from 'react'
 import DnDContent from './DnDContent'
 import {Rnd} from 'react-rnd'
+import {Button} from 'semantic-ui-react'
 
 class DnDChatBox extends React.Component{
     constructor(){
         super()
         this.state={
           undraggableShown:true,
+          width: '100px',
+          height:'100px',
+          x: 0,
+          y:0
         }
         this.handleChildClick = this.handleChildClick.bind(this)
     }
@@ -31,6 +36,7 @@ class DnDChatBox extends React.Component{
         }
         const config= {x:0,y:0}
         return (
+
           <Rnd style={style} default={config} disableDragging={this.state.undraggableShown}>
             <DnDContent undraggable={this.state.undraggableShown} undraggableCallback={this.handleChildClick}/>
           </Rnd>

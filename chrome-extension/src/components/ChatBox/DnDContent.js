@@ -98,14 +98,14 @@ class DnDContent extends React.Component{
     render(){
         //console.log('this.state.messages:',this.state.messages)
         return(
-            <Container className='chat-container'>
-              <Label attached='top' color={this.props.undraggable ? 'yellow':'green'} onClick={this.props.undraggableCallback}>
-                Click to {this.props.undraggable ? 'enable':'disable'} the dragging mechanism
-              </Label>
-            
-             <Grid>
+            <span className='chat-container'>
+            <Container>
+            <Label attached='top' color={this.props.undraggable ? 'yellow':'green'} onClick={this.props.undraggableCallback}>
+                            Click to {this.props.undraggable ? 'enable':'disable'} the dragging mechanism
+                        </Label>
+                        <Grid >
                     <Grid.Row>
-                        <Grid.Column width={8}>
+                        <Grid.Column width={4}>
                             <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
                         </Grid.Column>
                         <Grid.Column width={8}>
@@ -114,16 +114,17 @@ class DnDContent extends React.Component{
             
                         </Grid.Column>
                     </Grid.Row>
-
                     <Grid.Row>
-                        <Grid.Column width={8}><NewRoomForm createRoom={this.createRoom}/>
+                        <Grid.Column width={4}><NewRoomForm createRoom={this.createRoom}/>
                         </Grid.Column>
                         <Grid.Column width={8}><SendForm disabled={!this.state.roomId} sendMessage={this.sendMessage}/>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
-        </Container>
+            </Container>
                 
+            </span>
+             
             // <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
             // <MessageList roomId={this.state.roomId} messageList={this.state.messages}/>
             // {this.state.roomId && <Button primary onClick={this.resetMessageList}>Reset message list</Button>}
