@@ -1,3 +1,9 @@
 .room-list{
-    
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    float: right;
+    height: 70%;
+    display: block;
+    background-color: greenyellow;
 }

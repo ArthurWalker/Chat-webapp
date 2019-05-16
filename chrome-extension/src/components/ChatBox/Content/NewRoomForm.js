@@ -28,7 +28,7 @@ class NewRoomForm extends React.Component{
     render(){
         return(
         <div className='room-form'>
-            <Form onSubmit={this.handleSubmit} >
+            <Form onSubmit={this.handleSubmit} className='form' >
                 <Form.Field>
                     <Form.Input  placeholder='Create a new room' value={this.state.roomName} required name='text' type='text' onChange={this.handleChange}/>
                 </Form.Field>

@@ -3,7 +3,7 @@ import MessageList from './Content/MessageList'
 import NewRoomForm from './Content/NewRoomForm'
 import RoomList from './Content/RoomList'
 import SendForm from './Content/SendForm'
-import {Container,Button,Grid,Label} from 'semantic-ui-react'
+import {Container,Button,Grid,Label, Image} from 'semantic-ui-react'
 import  '../../css/chat_container.css'
 import Chatkit from '@pusher/chatkit-client'
 import {instanceLocator,tokenUrl} from '../../hidden_data'
@@ -108,6 +108,7 @@ class DnDContent extends React.Component{
                 <div className='bottom'>
                     <div className='lower-left'>
                         <div className='upper' >
+                            <div className='profile-pic' ><Image centered src='https://cdn2.iconfinder.com/data/icons/budicon-user/16/32-user_-_single-512.png' size='tiny'/></div>
                             <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
                         </div>
                         <div className='lower' >
@@ -117,10 +118,10 @@ class DnDContent extends React.Component{
                     <div className='lower-right'>
                         <div className='upper'  >
                             <MessageList roomId={this.state.roomId} messageList={this.state.messages}/>
-                            {this.state.roomId && <Button primary onClick={this.resetMessageList}>Reset message list</Button>} 
                         </div>
                         <div className='lower'>
                             <SendForm disabled={!this.state.roomId} sendMessage={this.sendMessage}/>
+                            {this.state.roomId && <Button primary onClick={this.resetMessageList}>Reset message list</Button>} 
                         </div>
                     </div>
                 </div>
