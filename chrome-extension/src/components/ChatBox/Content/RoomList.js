@@ -1,6 +1,5 @@
 import React from 'react'
-import {List} from 'semantic-ui-react'
-import {Container} from 'semantic-ui-react'
+import {Container, Icon, List} from 'semantic-ui-react'
 import '../../../css/room_list.css'
 
 class RoomList extends React.Component{
@@ -14,11 +13,12 @@ class RoomList extends React.Component{
         // console.log(this.props.rooms)
         return(
         <Container className='room-list'>
-            <List link divided verticalAlign='middle'>
+            <List className='list' link relaxed celled>
                 {orderedRooms.map((room,index) =>{
                     const active = this.props.roomId === room.id ? 'active':''
                     return(
                     <List.Item as='a' style={active !== '' ? active_style:{}} onClick={()=>{this.props.subcribeToRoom(room.id)}} key={index}>
+                        <Icon name='github' size='large'   />
                         <List.Content>
                             <List.Header>{room.name}</List.Header>
                         </List.Content>

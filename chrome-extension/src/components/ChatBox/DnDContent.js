@@ -62,10 +62,10 @@ class DnDContent extends React.Component{
         this.setState({messages:[]})
         this.currentUser.subscribeToRoomMultipart({
             roomId:roomId,
-            messageLimit:5,
+            messageLimit:15,
             hooks:{
                 onMessage: message => {
-                    console.log("received message", message.parts[0].payload.content)
+                    //console.log("received message", message.parts[0].payload.content)
                     this.setState({messages:[...this.state.messages,message]})
                     }
             }
@@ -103,13 +103,14 @@ class DnDContent extends React.Component{
                 <div className='top'>
                     <Label attached='top' color={this.props.undraggable ? 'yellow':'green'} onClick={this.props.undraggableCallback}>
                         Click to {this.props.undraggable ? 'enable':'disable'} the dragging mechanism
+                        
                     </Label>
                 </div>
                 <div className='bottom'>
                     <div className='lower-left'>
                         <div className='upper' >
                             <div className='profile-pic' ><Image centered src='https://cdn2.iconfinder.com/data/icons/budicon-user/16/32-user_-_single-512.png' size='tiny'/></div>
-                            <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
+                            <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/> 
                         </div>
                         <div className='lower' >
                             <NewRoomForm createRoom={this.createRoom}/>
@@ -121,10 +122,11 @@ class DnDContent extends React.Component{
                         </div>
                         <div className='lower'>
                             <SendForm disabled={!this.state.roomId} sendMessage={this.sendMessage}/>
-                            {this.state.roomId && <Button primary onClick={this.resetMessageList}>Reset message list</Button>} 
                         </div>
                     </div>
                 </div>
+                {this.state.roomId && <Button primary onClick={this.resetMessageList}>Reset message list</Button>} 
+                        
             </span>
              
             // <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>

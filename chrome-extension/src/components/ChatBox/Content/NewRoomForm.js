@@ -30,7 +30,7 @@ class NewRoomForm extends React.Component{
         <div className='room-form'>
             <Form onSubmit={this.handleSubmit} className='form' >
                 <Form.Field>
-                    <Form.Input  placeholder='Create a new room' value={this.state.roomName} required name='text' type='text' onChange={this.handleChange}/>
+                    <Form.Input icon='wechat' focus placeholder='New room' value={this.state.roomName} required name='text' type='text' onChange={this.handleChange}/>
                 </Form.Field>
             </Form>
         </div>)
