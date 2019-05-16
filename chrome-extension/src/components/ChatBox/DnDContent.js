@@ -3,7 +3,7 @@ import MessageList from './Content/MessageList'
 import NewRoomForm from './Content/NewRoomForm'
 import RoomList from './Content/RoomList'
 import SendForm from './Content/SendForm'
-import {Container,Button,Grid,Label, Image} from 'semantic-ui-react'
+import {Container,Button,Grid,Label, Image, Checkbox} from 'semantic-ui-react'
 import  '../../css/chat_container.css'
 import Chatkit from '@pusher/chatkit-client'
 import {instanceLocator,tokenUrl} from '../../hidden_data'
@@ -101,9 +101,10 @@ class DnDContent extends React.Component{
         return(
             <span className='chat-container'>
                 <div className='top'>
-                    <Label attached='top' color={this.props.undraggable ? 'yellow':'green'} onClick={this.props.undraggableCallback}>
-                        Click to {this.props.undraggable ? 'enable':'disable'} the dragging mechanism
-                        
+                    <Label attached='top' color={this.props.undraggable ? 'yellow':'green'} onClick={this.props.undraggableCallback} >
+                        <p>Click to {this.props.undraggable ? 'enable':'disable'} the dragging mechanism
+                            {/* <Checkbox style={{float:'right'}} toggle /> */}
+                        </p>
                     </Label>
                 </div>
                 <div className='bottom'>

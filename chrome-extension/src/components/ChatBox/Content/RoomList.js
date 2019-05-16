@@ -13,14 +13,15 @@ class RoomList extends React.Component{
         // console.log(this.props.rooms)
         return(
         <Container className='room-list'>
-            <List className='list' link relaxed celled>
+        
+            <List className='list' link celled>
                 {orderedRooms.map((room,index) =>{
                     const active = this.props.roomId === room.id ? 'active':''
                     return(
                     <List.Item as='a' style={active !== '' ? active_style:{}} onClick={()=>{this.props.subcribeToRoom(room.id)}} key={index}>
-                        <Icon name='github' size='large'   />
-                        <List.Content>
-                            <List.Header>{room.name}</List.Header>
+                        <Icon name='github' style={{paddingRight:'0'}} size='large'   />
+                        <List.Content style={{paddingLeft:'0'}}>
+                            <List.Header style={{left:'10%'}} >{room.name}</List.Header>
                         </List.Content>
                     </List.Item>)
                 })}

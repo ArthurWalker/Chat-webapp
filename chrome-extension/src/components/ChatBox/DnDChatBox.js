@@ -32,7 +32,7 @@ class DnDChatBox extends React.Component{
           alignItems: "center",
           //justifyContent: "center",
           border: "solid 1px #ddd",
-          background: "#f0f0f0",
+          background: "rgb(229, 250, 246)",
         }
         const config= {x:0,y:0,height:400,width:700}
         return (
