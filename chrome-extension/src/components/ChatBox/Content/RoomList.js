@@ -3,6 +3,11 @@ import {Container, Icon, List} from 'semantic-ui-react'
 import '../../../css/room_list.css'
 
 class RoomList extends React.Component{
+    constructor(){
+        super()
+        this.state={}
+    }
+
     render(){
 
         const orderedRooms=[...this.props.rooms].sort((a,b)=>a.id-b.id)

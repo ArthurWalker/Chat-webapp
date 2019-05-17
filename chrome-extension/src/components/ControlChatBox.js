@@ -53,39 +53,40 @@ class ControlChatBox extends React.Component{
     render(){
         const { animation, duration, open } = this.state
         return(
-            <Grid columns={2}>
-        <Grid.Column>
-          <Form>
-            <Form.Select
-              label='Choose transition'
-              name='animation'
-              onChange={this.handleChange}
-              options={options}
-              value={animation}
-            />
-            <Form.Input
-              label={`Duration: ${duration}ms `}
-              min={100}
-              max={2000}
-              name='duration'
-              onChange={this.handleChange}
-              step={100}
-              type='range'
-              value={duration}
-            />
-            <Form.Button
-              content={open ? 'Close Portal' : 'Open Portal'}
-              negative={open}
-              positive={!open}
-              onClick={this.handleClick}
-            />
-          </Form>
+      //       <Grid columns={2}>
+      //   <Grid.Column>
+      //     <Form>
+      //       <Form.Select
+      //         label='Choose transition'
+      //         name='animation'
+      //         onChange={this.handleChange}
+      //         options={options}
+      //         value={animation}
+      //       />
+      //       <Form.Input
+      //         label={`Duration: ${duration}ms `}
+      //         min={100}
+      //         max={2000}
+      //         name='duration'
+      //         onChange={this.handleChange}
+      //         step={100}
+      //         type='range'
+      //         value={duration}
+      //       />
+      //       <Form.Button
+      //         content={open ? 'Close Portal' : 'Open Portal'}
+      //         negative={open}
+      //         positive={!open}
+      //         onClick={this.handleClick}
+      //       />
+      //     </Form>
 
-          <TransitionablePortal open={open} transition={{ animation, duration }}>
-            <DnDChatBox/>
-          </TransitionablePortal>
-        </Grid.Column>
-      </Grid>
+      //     <TransitionablePortal open={open} transition={{ animation, duration }}>
+      //       <DnDChatBox/>
+      //     </TransitionablePortal>
+      //   </Grid.Column>
+      // </Grid>
+      <DnDChatBox/>
         )
     }
 }

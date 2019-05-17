@@ -1,5 +1,5 @@
 import React from 'react'
-import {Segment,Feed, Message} from 'semantic-ui-react'
+import {Segment,Feed, Message, Label} from 'semantic-ui-react'
 import '../../../css/message.css'
 
 class Messages extends React.Component{
@@ -11,10 +11,11 @@ class Messages extends React.Component{
     render(){
         return( 
             <div className='message'>
-                <Message  compact floating color='olive' size='small'>
-                    <p>{this.props.text}</p>
-                </Message>
-                <p>{this.props.username}</p>
+                <div className='message-box' style={{float:this.props.currentUser === this.props.username ? 'right':'left'}}>
+                    <p className='message-content'>{this.props.text}</p>
+                    <p className='message-user'>{this.props.username}</p> 
+                </div>
+                <br/>
             </div>
            
         )

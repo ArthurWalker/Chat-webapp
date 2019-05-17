@@ -27,7 +27,7 @@ class SendForm extends React.Component{
         <div className='send-form'>
             <Form  onSubmit={this.handleSubmit} >
                 <Form.Field>
-                    <Form.Input focus icon='chat' disabled={this.props.disabled} placeholder='Message...' value={this.state.message} name='text' type='text' onChange={this.handleChange}/>
+                    <Form.Input  focus icon='chat' disabled={this.props.disabled} placeholder='Message...' value={this.state.message} name='text' type='text' onChange={this.handleChange}/>
                 </Form.Field>
             </Form>
         </div>)

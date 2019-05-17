@@ -2,6 +2,7 @@ import React from 'react'
 import Messages from './Messages'
 import ReactDom from 'react-dom'
 import '../../../css/message_list.css'
+import {Label} from 'semantic-ui-react'
 
 class MessageList extends React.Component{
 
@@ -20,7 +21,7 @@ class MessageList extends React.Component{
         return(
         <div className='message-list'>
             {this.props.messageList.map((message,index)=>{
-                return (<Messages key={index} username={message.senderId} text={message.parts[0].payload.content}/>)
+                return (<Messages key={index} currentUser={this.props.currentUser} username={message.senderId} text={message.parts[0].payload.content}/>)
             })}
         </div>)
     }

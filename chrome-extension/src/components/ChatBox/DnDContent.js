@@ -3,7 +3,7 @@ import MessageList from './Content/MessageList'
 import NewRoomForm from './Content/NewRoomForm'
 import RoomList from './Content/RoomList'
 import SendForm from './Content/SendForm'
-import {Container,Button,Grid,Label, Image, Checkbox} from 'semantic-ui-react'
+import {Container,Button,Grid,Label, Image, Checkbox, Input} from 'semantic-ui-react'
 import  '../../css/chat_container.css'
 import Chatkit from '@pusher/chatkit-client'
 import {instanceLocator,tokenUrl} from '../../hidden_data'
@@ -17,7 +17,8 @@ class DnDContent extends React.Component{
             joinableRooms:[],
             joinedRooms:[],
             roomId:'',
-            undraggable:true
+            undraggable:true,
+            currentUser:'arthur'
         }
         this.sendMessage=this.sendMessage.bind(this)
         this.subcribeToRoom=this.subcribeToRoom.bind(this)
@@ -33,7 +34,7 @@ class DnDContent extends React.Component{
     componentDidMount(){
         const chatManager = new Chatkit.ChatManager({
             instanceLocator,
-            userId:'arthur',
+            userId:this.state.currentUser,
             tokenProvider: new Chatkit.TokenProvider({
                 url: tokenUrl
             })
@@ -43,7 +44,6 @@ class DnDContent extends React.Component{
         .then(currentUser => {
             this.currentUser=currentUser
             this.getRoom()
-            //this.subcribeToRoom()
         })
     }
 
@@ -51,8 +51,8 @@ class DnDContent extends React.Component{
         this.currentUser.getJoinableRooms()
         .then(joinableRooms => {
             this.setState({
-            joinableRooms,
-            joinedRooms: this.currentUser.rooms
+                joinableRooms,
+                joinedRooms: this.currentUser.rooms
             })
         })
         .catch(err=>console.log('error on joinableRooms: ',err))
@@ -65,7 +65,6 @@ class DnDContent extends React.Component{
             messageLimit:15,
             hooks:{
                 onMessage: message => {
-                    //console.log("received message", message.parts[0].payload.content)
                     this.setState({messages:[...this.state.messages,message]})
                     }
             }
@@ -79,7 +78,6 @@ class DnDContent extends React.Component{
     }
 
     sendMessage(text){
-        //console.log(text)
         this.currentUser.sendMessage({
             text:text,
             roomId:this.state.roomId
@@ -96,7 +94,6 @@ class DnDContent extends React.Component{
 
 
     render(){
-        //console.log('this.state.messages:',this.state.messages)
         if (this.state.messages)
         return(
             <span className='chat-container'>
@@ -110,23 +107,36 @@ class DnDContent extends React.Component{
                 <div className='bottom'>
                     <div className='lower-left'>
                         <div className='upper' >
-                            <div className='profile-pic' ><Image centered src='https://cdn2.iconfinder.com/data/icons/budicon-user/16/32-user_-_single-512.png' size='tiny'/></div>
+                            <div className='profile-pic' >
+                                <Image centered src='https://cdn2.iconfinder.com/data/icons/budicon-user/16/32-user_-_single-512.png' size='tiny'/>
+                            </div>
+                            <div className='search'>
+                                <Input focus size='mini' transparent icon='search' list='rooms' placeholder='Find...' />
+                                <datalist id='rooms'>
+                                    <option value='Room1' />
+                                    <option value='Room2' />
+                                </datalist>
+                            </div>
                             <RoomList running_roomId={this.props.roomId} subcribeToRoom={this.subcribeToRoom} rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/> 
+                            <div className='close-button'>
+                                {this.state.roomId && <a className='close-link' href='#' onClick={this.resetMessageList}>Close</a>}
+                            </div>
                         </div>
                         <div className='lower' >
-                            <NewRoomForm createRoom={this.createRoom}/>
+                           <NewRoomForm createRoom={this.createRoom}/>
                         </div>
                     </div>
                     <div className='lower-right'>
-                        <div className='upper'  >
-                            <MessageList roomId={this.state.roomId} messageList={this.state.messages}/>
+                        <div className='upper'>
+                            <MessageList currentUser={this.state.currentUser} roomId={this.state.roomId} messageList={this.state.messages}/>
                         </div>
                         <div className='lower'>
                             <SendForm disabled={!this.state.roomId} sendMessage={this.sendMessage}/>
                         </div>
                     </div>
+                           
                 </div>
-                {this.state.roomId && <Button primary onClick={this.resetMessageList}>Reset message list</Button>} 
+                
                         
             </span>
              
