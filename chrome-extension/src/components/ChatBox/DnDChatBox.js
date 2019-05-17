@@ -1,19 +1,23 @@
 import React from 'react'
 import DnDContent from './DnDContent'
 import {Rnd} from 'react-rnd'
-import { Label, Grid} from 'semantic-ui-react'
+import {Button} from 'semantic-ui-react'
 
 class DnDChatBox extends React.Component{
     constructor(){
         super()
         this.state={
-          undraggable:true,
+          undraggableShown:true,
+          width: '100px',
+          height:'100px',
+          x: 0,
+          y:0
         }
-        this.handleButtonPress = this.handleButtonPress.bind(this)
+        this.handleChildClick = this.handleChildClick.bind(this)
     }
 
-    handleButtonPress () {
-      this.setState({undraggable:!this.state.undraggable})
+    handleChildClick() {
+      this.setState({undraggableShown:!this.state.undraggableShown})
     }
   
 
@@ -28,21 +32,13 @@ class DnDChatBox extends React.Component{
           alignItems: "center",
           //justifyContent: "center",
           border: "solid 1px #ddd",
-          background: "#f0f0f0",
+          background: "rgb(222, 237, 252)",
         }
-        const config= {
-          x: 100,
-          y: 500,
-        }
-        console.log(this.state.undraggable)
+        const config= {x:0,y:0,height:400,width:700}
         return (
-          <Rnd style={style} default={config} disableDragging={this.state.undraggable}>
-        
-                <Label attached='top' color={this.state.undraggable ? 'yellow':'green'} onClick={this.handleButtonPress}>
-                  Click to {this.state.undraggable ? 'enable':'disable'} the dragging mechanism
-                </Label>
-             
-                <DnDContent/>
+
+          <Rnd style={style} default={config} disableDragging={this.state.undraggableShown}>
+            <DnDContent undraggable={this.state.undraggableShown} undraggableCallback={this.handleChildClick}/>
           </Rnd>
         );
       }

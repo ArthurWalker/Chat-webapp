@@ -1,6 +1,8 @@
 import React from 'react'
-import Message from './Message'
+import Messages from './Messages'
 import ReactDom from 'react-dom'
+import '../../../css/message_list.css'
+import {Label} from 'semantic-ui-react'
 
 class MessageList extends React.Component{
 
@@ -11,18 +13,16 @@ class MessageList extends React.Component{
 
     render(){
         if (!this.props.roomId){
-            return(<div className="message-list">
-            <div className="join-room">
+            return(
+            <p className="join-room">
                 &larr; Join a room!
-            </div>
-        </div>)
+            </p>)
         }
         return(
-        <div className='message-list' style={{height:'180px',overflowY: 'scroll'}}>
-            <h1>MessageList</h1>
-                {this.props.messageList.map((message,index)=>{
-                    return (<Message key={index} username={message.senderId} text={message.parts[0].payload.content}/>)
-                })}
+        <div className='message-list'>
+            {this.props.messageList.map((message,index)=>{
+                return (<Messages key={index} currentUser={this.props.currentUser} username={message.senderId} text={message.parts[0].payload.content}/>)
+            })}
         </div>)
     }
 }

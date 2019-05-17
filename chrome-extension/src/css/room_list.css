@@ -1,0 +1,20 @@
+.room-list{
+    width: 100%;
+    float: right;
+    height: 53%;
+    /* background-color: greenyellow; */
+    position: relative;
+    display:block;
+    overflow-y: scroll;
+}
+
+.list{
+    text-align: center;
+    height: 95%;
+    width: 90%;
+    /* background-color: aquamarine; */
+    display:block;
+    position: absolute;
+    top: 2.5%;
+    left: 5%
+}

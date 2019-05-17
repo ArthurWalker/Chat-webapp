@@ -1,0 +1,17 @@
+.message-list{
+    overflow-y: scroll;
+    max-height:100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top:1%;
+}
+
+.join-room{
+    text-align: center;
+    padding-top:25%;
+    width:100%;
+
+}

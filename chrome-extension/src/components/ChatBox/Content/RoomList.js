@@ -1,9 +1,13 @@
 import React from 'react'
-import {List} from 'semantic-ui-react'
-
-
+import {Container, Icon, List} from 'semantic-ui-react'
+import '../../../css/room_list.css'
 
 class RoomList extends React.Component{
+    constructor(){
+        super()
+        this.state={}
+    }
+
     render(){
 
         const orderedRooms=[...this.props.rooms].sort((a,b)=>a.id-b.id)
@@ -12,20 +16,22 @@ class RoomList extends React.Component{
             size:'10px'
         }
         // console.log(this.props.rooms)
-        return(<div>
-            <h1>Room List</h1>
-            <List link divided verticalAlign='middle'>
+        return(
+        <Container className='room-list'>
+        
+            <List className='list' link celled>
                 {orderedRooms.map((room,index) =>{
                     const active = this.props.roomId === room.id ? 'active':''
                     return(
                     <List.Item as='a' style={active !== '' ? active_style:{}} onClick={()=>{this.props.subcribeToRoom(room.id)}} key={index}>
-                        <List.Content>
-                            <List.Header>{room.name}</List.Header>
+                        <Icon name='github' style={{paddingRight:'0'}} size='large'   />
+                        <List.Content style={{paddingLeft:'0'}}>
+                            <List.Header style={{left:'10%'}} >{room.name}</List.Header>
                         </List.Content>
                     </List.Item>)
                 })}
             </List>
-        </div>)
+        </Container>)
     }
 }
 
